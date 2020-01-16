@@ -1,0 +1,39 @@
+body,html{
+	margin:0;
+	padding:0;
+	font-size:16px;
+	font-family:Arial, Verdana;
+}
+h1{
+	font-size:25px;
+	margin:0;
+	padding:10px 0;
+}
+.container{
+	width:50%;
+	margin:5% auto;
+}
+.form .row{
+	padding:10px 0;
+}
+.form .row label{
+	display:block;
+	padding-bottom:5px;
+}
+.form .row input, .form .row select, .form .row textarea{
+	width:100%;
+	border:solid 1px rgba(0,0,0,.2);
+	border-radius:3px;
+	padding:10px;
+	box-sizing:border-box;
+}
+button{
+	border:solid 1px rgba(0,0,0,0.2);
+	font-size:18px;
+	padding:10px;
+	border-radius:5px;
+}
+.submit{
+	color:white;
+	background:rgba(0,0,0,.8)
+}
