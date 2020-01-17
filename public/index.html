@@ -1,39 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <title>Feedback Form</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/x-icon" href="./favicon.ico">
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
 <body>
 
 <div class="container">
 	<h1>Feedback Form</h1>
-	<form class="form">
+	<form class="form" onsubmit="return false;">
 		<div class="row">
 			<label>Name</label>
-			<input type="text" value="" class="focusable" id="name" />
+			<input type="text" value="" tabindex="1" class="focusable" id="name" />
 		</div>
 		<div class="row">
 			<label>Select List</label>
-			<!--<select class="focusable">
-				<option class="focusable">List 1<option>
-				<option class="focusable">List 2<option>
-				<option class="focusable">List 3<option>
-				<option class="focusable">List 4<option>
-			</select>-->
-			<a href="#" class="focusable selectlist" onclick="selectlist()"><span id="dd-1-value">Select List</span>			
+			<a href="#" class="focusable selectlist" tabindex="2" onclick="selectlist()"><span id="dd-1-value">Select List</span>	 <i class="down"></i>		
 			</a>
-			<div id="dd-1" class="ddmenu" style="display:none;">
-				<a href="#" class="focusable" onclick="selectlistOption(this)">List 1</a>
-				<a href="#" class="focusable" onclick="selectlistOption(this)">List 2</a>
-				<a href="#" class="focusable" onclick="selectlistOption(this)">List 3</a>
+			<div id="dd-1" class="ddmenu" style="display:none">
+				<a href="#" class="focusable" tabindex="3" onclick="selectlistOption(this)">List 1</a>
+				<a href="#" class="focusable" tabindex="4" onclick="selectlistOption(this)">List 2</a>
+				<a href="#" class="focusable" tabindex="5" onclick="selectlistOption(this)">List 3</a>
+				<a href="#" class="focusable" tabindex="6" onclick="selectlistOption(this)">List 4</a>
 			</div>
 		</div>
 		<div class="row">
 			<label>Descriptions</label>
-			<textarea rows="8" class="focusable" id="desc" data-id="2"></textarea>
+			<textarea rows="8" id="desc"  class="focusable" ></textarea>
 		</div>
-		<div class="row"><button class="focusable">Submit</button> <button class="focusable">Clear</button></div>
+		<div class="row"><button class="focusable" onclick="submitForm()" >Submit</button> <button class="focusable">Clear</button></div>
 	</form>
 </div>
 <script src="spatial_navigation.js"></script>
@@ -66,6 +61,7 @@
 	  
 	  
 	  function selectlist(){
+	  
 		var dd = document.getElementById('dd-1');
 		console.log(dd.style.display);
 		if(dd.style.display === 'none'){
@@ -81,6 +77,27 @@
 		   dd.innerHTML = ddText;
 		   selectlist();
 		   SpatialNavigation.focus('textarea', true)
+	   }
+	   
+	   function submitForm(){
+		var params = {
+			name:"",
+			list:"",
+			description:""
+		}
+		params.name = document.getElementById("name").value;
+		params.list = document.getElementById("dd-1-value").innerHTML;
+		params.description = document.getElementById("desc").value;
+		
+		var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+			  document.getElementById("demo").innerHTML = this.responseText;
+			}
+		  };
+		  xhttp.open("POST", "demo_post.asp", true);
+		  xhttp.send(JSON.stringify(params));
+		  
 	   }
 	  
     </script>
