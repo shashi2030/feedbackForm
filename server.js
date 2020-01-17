@@ -47,7 +47,7 @@ app.post("/feedback", (req,res) => {
 })
 
 app.get("/feedback", function(req, res) {
-    Login.find({}, function(err, feedback) {
+    Feedback.find({}, function(err, feedback) {
       if (err)
         return res
           .status(500)
