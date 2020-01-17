@@ -80,23 +80,35 @@
 	   }
 	   
 	   function submitForm(){
-		var params = {
-			name:"",
-			list:"",
-			description:""
+		const payload = {
+			name: document.getElementById("name").value,
+			list: document.getElementById("dd-1-value").innerHTML,
+			description: document.getElementById("desc").value
 		}
-		params.name = document.getElementById("name").value;
-		params.list = document.getElementById("dd-1-value").innerHTML;
-		params.description = document.getElementById("desc").value;
-		
-		var xhttp = new XMLHttpRequest();
-		  xhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-			  document.getElementById("demo").innerHTML = this.responseText;
+
+		fetch('/feedback', {
+			method: "POST",
+			headers: {
+				Accept: "application/JSON",
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(payload)
+		}).then(res=> {
+			if(res.status === 200) {
+				console.log("pushed successfully");
+			} else {
+				console.log("Problem during Submit");
 			}
-		  };
-		  xhttp.open("POST", "demo_post.asp", true);
-		  xhttp.send(JSON.stringify(params));
+		}).catch(err => console.log(err))
+		
+		// var xhttp = new XMLHttpRequest();
+		//   xhttp.onreadystatechange = function() {
+		// 	if (this.readyState == 4 && this.status == 200) {
+		// 	  document.getElementById("demo").innerHTML = this.responseText;
+		// 	}
+		//   };
+		//   xhttp.open("POST", "demo_post.asp", true);
+		//   xhttp.send(JSON.stringify(params));
 		  
 	   }
 	  
