@@ -15,16 +15,23 @@
 		</div>
 		<div class="row">
 			<label>Select List</label>
-			<select class="focusable">
-				<option>List 1<option>
-				<option>List 2<option>
-				<option>List 3<option>
-				<option>List 4<option>
-			</select>
+			<!--<select class="focusable">
+				<option class="focusable">List 1<option>
+				<option class="focusable">List 2<option>
+				<option class="focusable">List 3<option>
+				<option class="focusable">List 4<option>
+			</select>-->
+			<a href="#" class="focusable selectlist" onclick="selectlist()"><span id="dd-1-value">Select List</span>			
+			</a>
+			<div id="dd-1" class="ddmenu" style="display:none;">
+				<a href="#" class="focusable" onclick="selectlistOption(this)">List 1</a>
+				<a href="#" class="focusable" onclick="selectlistOption(this)">List 2</a>
+				<a href="#" class="focusable" onclick="selectlistOption(this)">List 3</a>
+			</div>
 		</div>
 		<div class="row">
 			<label>Descriptions</label>
-			<textarea rows="8" class="focusable"></textarea>
+			<textarea rows="8" class="focusable" id="desc" data-id="2"></textarea>
 		</div>
 		<div class="row"><button class="focusable">Submit</button> <button class="focusable">Clear</button></div>
 	</form>
@@ -50,7 +57,32 @@
 
         // Focus the first navigable element.
         SpatialNavigation.focus();
+		
+		
+	  
       });
+	  
+	  
+	  
+	  
+	  function selectlist(){
+		var dd = document.getElementById('dd-1');
+		console.log(dd.style.display);
+		if(dd.style.display === 'none'){
+		dd.style.display = 'block';
+		}else{
+			dd.style.display = 'none';
+		}
+	  }
+	  
+	   function selectlistOption(_ele){
+		   var dd = document.getElementById('dd-1-value');	   
+		   var ddText = _ele.text;
+		   dd.innerHTML = ddText;
+		   selectlist();
+		   SpatialNavigation.focus('desc');
+	   }
+	  
     </script>
 </body>
 </html> 
