@@ -98,3 +98,14 @@ button{
 .nonfocusable::before {
   content: 'Non-focusable Element';
 }
+
+.success{
+	color:green;
+}
+.error{
+	color:red;
+}
+#form-submitted-msg{
+-webkit-transition: all 500ms linear;
+transition: all 500ms linear;
+}
