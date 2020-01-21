@@ -8,49 +8,115 @@
 
 <div class="container">
 	<h1>Feedback Form</h1>
-	<form class="form">
+	<form class="form" onsubmit="return false;">
+		<div class="row"><div id="form-submitted-msg"></div></div>
 		<div class="row">
 			<label>Name</label>
-			<input type="text" value="" class="focusable" id="name" />
+			<input type="text" value="" tabindex="1" class="focusable" id="name" />
 		</div>
 		<div class="row">
 			<label>Select List</label>
-			<select class="focusable">
-				<option class="focusable">List 1<option>
-				<option class="focusable">List 2<option>
-				<option class="focusable">List 3<option>
-				<option class="focusable">List 4<option>
-			</select>
+			<a href="#" class="focusable selectlist" tabindex="2" onclick="selectlist()"><span id="dd-1-value">Select List</span>	 <i class="down"></i>		
+			</a>
+			<div id="dd-1" class="ddmenu" style="display:none">
+				<a href="#" class="focusable" tabindex="3" onclick="selectlistOption(this)">List 1</a>
+				<a href="#" class="focusable" tabindex="4" onclick="selectlistOption(this)">List 2</a>
+				<a href="#" class="focusable" tabindex="5" onclick="selectlistOption(this)">List 3</a>
+				<a href="#" class="focusable" tabindex="6" onclick="selectlistOption(this)">List 4</a>
+			</div>
 		</div>
 		<div class="row">
 			<label>Descriptions</label>
-			<textarea rows="8" class="focusable"></textarea>
+			<textarea rows="8" id="desc"  class="focusable" ></textarea>
 		</div>
-		<div class="row"><button class="focusable">Submit</button> <button class="focusable">Clear</button></div>
+		<div class="row"><button class="focusable" onclick="submitForm()" >Submit</button> <button class="focusable" style="background:#fed8b1">Clear</button></div>
 	</form>
 </div>
 <script src="spatial_navigation.js"></script>
 <script>
-      window.addEventListener('load', function() {
-        // Initialize
-        SpatialNavigation.init();
+	window.addEventListener('load', function() {
+		
+	// Initialize
+	SpatialNavigation.init();
 
-        // Define the navigable elements.
-        SpatialNavigation.add({
-          selector: '.focusable'
-        });
+	// Define the navigable elements.
+	SpatialNavigation.add({
+		selector: '.focusable'
+	});
+	// Add 'tabindex="-1"' to "currently-existing" navigable elements. It's
+	// just a helper and is optional since you can actually add "tabindex"
+	// by yourself.
+	//
+	// Note: If a new navigable element is appended to DOM tree afterwards,
+	// you may need to call this method again.
+	SpatialNavigation.makeFocusable();
 
-        // Add 'tabindex="-1"' to "currently-existing" navigable elements. It's
-        // just a helper and is optional since you can actually add "tabindex"
-        // by yourself.
-        //
-        // Note: If a new navigable element is appended to DOM tree afterwards,
-        // you may need to call this method again.
-        SpatialNavigation.makeFocusable();
+	// Focus the first navigable element.
+	SpatialNavigation.focus();		
+	
+	});
 
-        // Focus the first navigable element.
-        SpatialNavigation.focus();
-      });
+		  
+	var formsubmittedmsg = document.getElementById("form-submitted-msg");
+	var ddList = document.getElementById('dd-1');
+	var ddValue = document.getElementById('dd-1-value');
+	var name1 = document.getElementById("name");
+	var list = document.getElementById("dd-1-value");
+	var description = document.getElementById("desc");	
+	  
+	  
+	function selectlist(){
+	if(ddList.style.display === 'none'){
+		ddList.style.display = 'block';
+	}else{
+		ddList.style.display = 'none';
+	}
+	}
+	  
+	function selectlistOption(_ele){		      
+		var ddText = _ele.text;
+		ddValue.innerHTML = ddText;
+		selectlist();
+		SpatialNavigation.focus('textarea', true)
+	}
+	   
+	function submitForm(){
+	var payload = {
+		name:name1.value,
+		list:list.innerHTML,
+		description:description.value
+	};
+	fetch('https://feedback-39e94.firebaseio.com/feedback.json', {
+		method: "POST",
+		headers: {
+			Accept: "application/JSON",
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(payload)
+	}).then(res=> {
+		if(res.status === 200) {
+			name1.value = "";
+			list.innerHTML = "Select List";
+			description.value = "";
+			formsubmittedmsg.innerHTML = "Form Submitted Successfully";
+			formsubmittedmsg.classList.add('success');
+			removeMessage();
+		} else {
+			formsubmittedmsg.innerHTML = "Error While Submitting Form";
+			formsubmittedmsg.classList.add('error');
+			removeMessage();
+		}
+	}).catch(err => console.log(err))
+		
+	}
+
+	function removeMessage(){
+		setTimeout(function(){
+		formsubmittedmsg.removeAttribute("class");
+		formsubmittedmsg.innerHTML = '';
+		},2000)
+	}
+	  
     </script>
 </body>
 </html> 
