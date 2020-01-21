@@ -29,7 +29,7 @@
 			<label>Descriptions</label>
 			<textarea rows="8" id="desc"  class="focusable" ></textarea>
 		</div>
-		<div class="row"><button class="focusable" onclick="submitForm()" >Submit</button> <button class="focusable" style="background:red">Clear</button></div>
+		<div class="row"><button class="focusable" onclick="submitForm()" >Submit</button> <button class="focusable" >Clear</button></div>
 	</form>
 </div>
 <script src="spatial_navigation.js"></script>
@@ -115,7 +115,7 @@
 		formsubmittedmsg.removeAttribute("class");
 		formsubmittedmsg.innerHTML = '';
 		SpatialNavigation.focus('input', true)
-		},2000)
+		},3000)
 	}
     </script>
 </body>

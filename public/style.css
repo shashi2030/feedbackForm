@@ -101,15 +101,13 @@ button{
 
 .success{
 	color:green;
-	font-size:18px;
-	font-weight: bold;
 }
 .error{
-	color:red;
-	font-size:18px;
-	font-weight: bold;
+	color:red;	
 }
 #form-submitted-msg{
+	font-size:18px;
+	font-weight: bold;
 -webkit-transition: all 500ms linear;
 transition: all 500ms linear;
 }
