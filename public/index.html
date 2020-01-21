@@ -29,7 +29,7 @@
 			<label>Descriptions</label>
 			<textarea rows="8" id="desc"  class="focusable" ></textarea>
 		</div>
-		<div class="row"><button class="focusable" onclick="submitForm()" >Submit</button> <button class="focusable" style="background:#fed8b1">Clear</button></div>
+		<div class="row"><button class="focusable" onclick="submitForm()" >Submit</button> <button class="focusable" style="background:#ff0000">Clear</button></div>
 	</form>
 </div>
 <script src="spatial_navigation.js"></script>
@@ -52,11 +52,11 @@
 	SpatialNavigation.makeFocusable();
 
 	// Focus the first navigable element.
-	SpatialNavigation.focus();		
-	
-	});
+	SpatialNavigation.focus();
 
-		  
+
+
+	  
 	var formsubmittedmsg = document.getElementById("form-submitted-msg");
 	var ddList = document.getElementById('dd-1');
 	var ddValue = document.getElementById('dd-1-value');
@@ -115,7 +115,11 @@
 		formsubmittedmsg.removeAttribute("class");
 		formsubmittedmsg.innerHTML = '';
 		},2000)
-	}
+	}	
+	
+	});
+
+	
 	  
     </script>
 </body>
