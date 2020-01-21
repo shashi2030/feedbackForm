@@ -29,7 +29,7 @@
 			<label>Descriptions</label>
 			<textarea rows="8" id="desc"  class="focusable" ></textarea>
 		</div>
-		<div class="row"><button class="focusable" onclick="submitForm()" >Submit</button> <button class="focusable" style="background:pink">Clear</button></div>
+		<div class="row"><button class="focusable" onclick="submitForm()" >Submit</button> <button class="focusable" style="background:red">Clear</button></div>
 	</form>
 </div>
 <script src="spatial_navigation.js"></script>
@@ -77,7 +77,26 @@
 		SpatialNavigation.focus('textarea', true)
 	}
 		
-	  
+	 
+	 function submitForm(){
+		var formsubmittedmsg = document.getElementById("form-submitted-msg");
+		var name1 = document.getElementById("name");
+		var list = document.getElementById("dd-1-value");
+		var description = document.getElementById("desc");
+		var payload = {
+			name:name1.value,
+			list:list.innerHTML,
+			description:description.value
+		};
+		
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', 'https://feedback-39e94.firebaseio.com/feedback.json');
+		xhr.send(JSON.stringify(payload));
+		xhr.onload = function() {
+		var responseObj = xhr.response;
+			console.log(responseObj)
+		};
+	}
 	/*  
 	function selectlist(){
 	var ddList = document.getElementById('dd-1');
