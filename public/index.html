@@ -29,7 +29,7 @@
 			<label>Descriptions</label>
 			<textarea rows="8" id="desc"  class="focusable" ></textarea>
 		</div>
-		<div class="row"><button class="focusable" onclick="submitForm()" >Submit</button> <button class="focusable" style="background:#ff0000">Clear</button></div>
+		<div class="row"><button class="focusable" onclick="submitForm()" >Submit</button> <button class="focusable" style="background:#00ff00">Clear</button></div>
 	</form>
 </div>
 <script src="spatial_navigation.js"></script>
@@ -54,18 +54,17 @@
 	// Focus the first navigable element.
 	SpatialNavigation.focus();
 
+	
+	
+	});
 
-
-	  
-	var formsubmittedmsg = document.getElementById("form-submitted-msg");
-	var ddList = document.getElementById('dd-1');
-	var ddValue = document.getElementById('dd-1-value');
-	var name1 = document.getElementById("name");
-	var list = document.getElementById("dd-1-value");
-	var description = document.getElementById("desc");	
+	
+	
+		
 	  
 	  
 	function selectlist(){
+	var ddList = document.getElementById('dd-1');
 	if(ddList.style.display === 'none'){
 		ddList.style.display = 'block';
 	}else{
@@ -73,7 +72,8 @@
 	}
 	}
 	  
-	function selectlistOption(_ele){		      
+	function selectlistOption(_ele){	
+var ddValue = document.getElementById('dd-1-value');	
 		var ddText = _ele.text;
 		ddValue.innerHTML = ddText;
 		selectlist();
@@ -81,6 +81,10 @@
 	}
 	   
 	function submitForm(){
+	var formsubmittedmsg = document.getElementById("form-submitted-msg");
+	var name1 = document.getElementById("name");
+	var list = document.getElementById("dd-1-value");
+	var description = document.getElementById("desc");
 	var payload = {
 		name:name1.value,
 		list:list.innerHTML,
@@ -111,14 +115,12 @@
 	}
 
 	function removeMessage(){
+	var formsubmittedmsg = document.getElementById("form-submitted-msg");
 		setTimeout(function(){
 		formsubmittedmsg.removeAttribute("class");
 		formsubmittedmsg.innerHTML = '';
 		},2000)
 	}	
-	
-	});
-
 	
 	  
     </script>
