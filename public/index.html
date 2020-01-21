@@ -74,7 +74,7 @@
 		
 		ddValue.innerHTML = ddText;
 		selectlist();
-		SpatialNavigation.focus('textarea', true)
+		SpatialNavigation.focus('textarea', true);
 	}
 		
 	 
@@ -88,52 +88,13 @@
 			list:list.innerHTML,
 			description:description.value
 		};
+		var url = 'https://feedback-39e94.firebaseio.com/feedback.json';
 		
 		var xhr = new XMLHttpRequest();
-		xhr.open('POST', 'https://feedback-39e94.firebaseio.com/feedback.json');
+		xhr.open('POST', url);
 		xhr.send(JSON.stringify(payload));
-		xhr.onload = function() {
-		var responseObj = xhr.response;
-			console.log(responseObj)
-		};
-	}
-	/*  
-	function selectlist(){
-	var ddList = document.getElementById('dd-1');
-	if(ddList.style.display === 'none'){
-		ddList.style.display = 'block';
-	}else{
-		ddList.style.display = 'none';
-	}
-	}
-	  
-	function selectlistOption(_ele){	
-var ddValue = document.getElementById('dd-1-value');	
-		var ddText = _ele.text;
-		ddValue.innerHTML = ddText;
-		selectlist();
-		SpatialNavigation.focus('textarea', true)
-	}
-	   
-	function submitForm(){
-	var formsubmittedmsg = document.getElementById("form-submitted-msg");
-	var name1 = document.getElementById("name");
-	var list = document.getElementById("dd-1-value");
-	var description = document.getElementById("desc");
-	var payload = {
-		name:name1.value,
-		list:list.innerHTML,
-		description:description.value
-	};
-	fetch('https://feedback-39e94.firebaseio.com/feedback.json', {
-		method: "POST",
-		headers: {
-			Accept: "application/JSON",
-			"Content-Type": "application/json"
-		},
-		body: JSON.stringify(payload)
-	}).then(res=> {
-		if(res.status === 200) {
+		xhr.onreadystatechange = function() { // Call a function when the state changes.
+			if(xhr.status === 200) {
 			name1.value = "";
 			list.innerHTML = "Select List";
 			description.value = "";
@@ -145,8 +106,7 @@ var ddValue = document.getElementById('dd-1-value');
 			formsubmittedmsg.classList.add('error');
 			removeMessage();
 		}
-	}).catch(err => console.log(err))
-		
+		}
 	}
 
 	function removeMessage(){
@@ -154,10 +114,9 @@ var ddValue = document.getElementById('dd-1-value');
 		setTimeout(function(){
 		formsubmittedmsg.removeAttribute("class");
 		formsubmittedmsg.innerHTML = '';
+		SpatialNavigation.focus('input', true)
 		},2000)
-	}	
-	*/
-	  
+	}
     </script>
 </body>
 </html> 
